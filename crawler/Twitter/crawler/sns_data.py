@@ -2,9 +2,9 @@
 from selenium import webdriver
 import pdb;
 import re;
-import pymysql;
 import os;
 from selenium.webdriver.common.keys import Keys
+from db import *
 
 class CrawlBrowser:
     # browser = None
@@ -19,17 +19,7 @@ class CrawlBrowser:
         # self.resDict = {'media_id': [], 'img_url': [], 'review_url': [], 'display_date': [],'keyword':self.keyword}
         self.url = "https://www.twitter.com/"
         
-        self.trip_sql = '''
-        INSERT IGNORE INTO trip_metadata (trip_gallery_id,trip_review_url) VALUES (%s, %s)
-        '''
-        self.img_sql ='''
-        INSERT IGNORE INTO image_info (image_url,trip_idx,search_keyword,crawling_date) VALUES (%s,%s,%s,now())
-        '''
 
-        keyword_list = '''
-            SELECT  `keywords`.* FROM `keywords` WHERE `keywords`.`active` = TRUE LIMIT 1
-            '''
-        
 
 
     def go_album(self):

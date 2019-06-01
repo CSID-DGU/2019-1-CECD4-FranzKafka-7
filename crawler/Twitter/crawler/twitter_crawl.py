@@ -23,7 +23,6 @@ class CrawlBrowser:
         # 나중에 database 클래스를 따로 뺄 예정
         #trip_review_url,trip_gallery_id
 
-
         self.trip_sql = '''
         INSERT IGNORE INTO trip_metadata (trip_gallery_id,trip_review_url) VALUES (%s, %s)
         '''
