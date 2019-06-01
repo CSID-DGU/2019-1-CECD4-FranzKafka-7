@@ -16,7 +16,9 @@ permit_params :word, :active
         id_column
         column :word
         column :active
+        column :end_date
         column :created_at
+
         actions
     end
 

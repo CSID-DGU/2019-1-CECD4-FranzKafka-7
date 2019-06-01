@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_153336) do
+ActiveRecord::Schema.define(version: 2019_06_01_202141) do
 
-  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_06_01_153336) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -38,14 +38,15 @@ ActiveRecord::Schema.define(version: 2019_06_01_153336) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "word"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: false
+    t.datetime "end_date", default: "2010-01-01 00:00:00"
   end
 
-  create_table "sns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "sns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "p_date"
     t.text "content"
     t.bigint "keyword_id"
@@ -54,17 +55,15 @@ ActiveRecord::Schema.define(version: 2019_06_01_153336) do
     t.index ["keyword_id"], name: "index_sns_on_keyword_id"
   end
 
-  create_table "twitter_metadata", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "item_id"
+  create_table "twitter_metadata", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "item_id"
     t.string "user_data_name"
     t.string "user_screen_name"
-    t.integer "user_id"
-    t.bigint "sns_id"
+    t.bigint "user_id"
+    t.integer "sns_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sns_id"], name: "index_twitter_metadata_on_sns_id"
   end
 
   add_foreign_key "sns", "keywords"
-  add_foreign_key "twitter_metadata", "sns", column: "sns_id"
 end
