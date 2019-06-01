@@ -1,26 +1,18 @@
 # -*- coding: utf-8 -*-
-from selenium import webdriver
-from util.extractor import *
-import pdb
 import time
+import sns_data
 
 
 if __name__ == "__main__":
     try:
+        
         start_time = time.time()
-        browser = CrawlBrowser(int(input()))
-        browser.go_album()
-
-
-        while(True):
-            browser.go_next()
-            browser.get_data_from_thumb()
-
-        print(time.time()-start_time)
-
-
+        browser = sns_data.CrawlBrowser()
+        
+        browser.crawl_data()
+        
     except:
+        browser.배고파()
         print("error")
     finally:
-
         print("end")

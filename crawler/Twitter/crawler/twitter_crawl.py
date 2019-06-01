@@ -76,8 +76,9 @@ class CrawlBrowser:
         print("insert_data")
         self.cursor.executemany(self.trip_sql,trip_list)
         first_id = self.conn.insert_id()
+        
         for idx , val in enumerate(range(first_id,first_id+len(img_list))):
-            img_list[idx].append(val)
+            img_list[idx].append(str(val))
             img_list[idx].append(self.keyword)
 
         self.cursor.executemany(self.img_sql,img_list)

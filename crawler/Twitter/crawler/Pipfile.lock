@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "754b789da904a6d2395e63dab9ce4aca2b69a11fdf44447012f5aae5f8a3a630"
+            "sha256": "5264e842fd7b46fe7dae6f24f6bd41605d0e4c91309008f919f39c18d014e040"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,21 @@
         ]
     },
     "default": {
+        "beautifulsoup4": {
+            "hashes": [
+                "sha256:034740f6cb549b4e932ae1ab975581e6103ac8f942200a0e9759065984391858",
+                "sha256:945065979fb8529dd2f37dbb58f00b661bdbcbebf954f93b32fdf5263ef35348",
+                "sha256:ba6d5c59906a85ac23dadfe5c88deaf3e179ef565f4898671253e50a78680718"
+            ],
+            "version": "==4.7.1"
+        },
+        "bs4": {
+            "hashes": [
+                "sha256:36ecea1fd7cc5c0c6e4a1ff075df26d50da647b75376626cc186e2212886dd3a"
+            ],
+            "index": "pypi",
+            "version": "==0.0.1"
+        },
         "pymysql": {
             "hashes": [
                 "sha256:3943fbbbc1e902f41daf7f9165519f140c4451c179380677e6a848587042561a",
@@ -31,6 +46,13 @@
             ],
             "index": "pypi",
             "version": "==3.141.0"
+        },
+        "soupsieve": {
+            "hashes": [
+                "sha256:6898e82ecb03772a0d82bd0d0a10c0d6dcc342f77e0701d0ec4a8271be465ece",
+                "sha256:b20eff5e564529711544066d7dc0f7661df41232ae263619dede5059799cdfca"
+            ],
+            "version": "==1.9.1"
         },
         "urllib3": {
             "hashes": [
