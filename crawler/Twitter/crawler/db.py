@@ -83,8 +83,9 @@ class TwitterMetadata:
         (`item_id`, `user_data_name`, `user_screen_name`, `user_id`, `sns_id`, `created_at`, `updated_at`) 
         VALUES (%s, %s, %s, %s, %s, now(), now())
         '''
+        
 
-        for idx , val in enumerate(range(first_id,first_id+len(data_list))):
+        for idx , val in enumerate(range(first_id-len(data_list) + 1, first_id + 1)):
             data_list[idx] = data_list[idx] + (val,)
         
         cursor.executemany(sql,data_list)

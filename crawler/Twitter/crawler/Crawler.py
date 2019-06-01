@@ -15,4 +15,5 @@ if __name__ == "__main__":
         browser.배고파()
         print("error")
     finally:
+        browser.배고파()
         print("end")

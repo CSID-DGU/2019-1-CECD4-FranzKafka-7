@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from db import *
 import datetime as dt
 from bs4 import BeautifulSoup
-
+import time
 
 class CrawlBrowser:
     # browser = None
@@ -33,26 +33,27 @@ class CrawlBrowser:
     
 
     def crawl_data(self):
-        print('crawl_data')
-        self.go_twit()
+        while self.until != self.end_date:
+            print('crawl_data')
+            self.go_twit()
 
-        sns_list, twitter_metadata_list = self.main_loop()
+            sns_list, twitter_metadata_list = self.main_loop()
+            
+            if sns_list != []:
+                first_id = Sns.save(sns_list);
 
-        if sns_list != []:
-            first_id = Sns.save(sns_list);
+                TwitterMetadata.save(first_id, twitter_metadata_list)
 
-            TwitterMetadata.save(first_id, twitter_metadata_list)
-
-        if self.until == self.end_date:
-            if len(keywords)-1 == keywords.index(keyword):
-                conn.close()
-                self.browser.close()
-                sys.exit()
+            if self.until == self.end_date:
+                if len(keywords)-1 == keywords.index(keyword):
+                    conn.close()
+                    self.browser.close()
+                    sys.exit()
+                else:
+                    self.keyword = self.keyword[keywords.index(keyword)+1]
             else:
-                self.keyword = self.keyword[keywords.index(keyword)+1]
-        else:
-            self.until = self.since
-            self.since = self.until - dt.timedelta(days=1)
+                self.until = self.since
+                self.since = self.until - dt.timedelta(days=1)
 
 
 
@@ -76,17 +77,17 @@ class CrawlBrowser:
         sns_list = []
         twitter_metadata_list = []
         while lastHeight != newHeight:
-            lastHeight = newHeight
-            html = browser.page_source
-            soup = BeautifulSoup(html,'html.parser')
             
+            lastHeight = newHeight
             browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             for i in range(0,6):
-                browser.implicitly_wait(10)
+                time.sleep(3)
                 newHeight = browser.execute_script("return document.body.scrollHeight")
                 if newHeight != lastHeight:
                     break;
-        
+
+        html = browser.page_source
+        soup = BeautifulSoup(html,'html.parser')
         for item in soup.find_all("li", {"class": "stream-item"}):
                 tweet = item.find('div', {"class":"tweet"})
                 
