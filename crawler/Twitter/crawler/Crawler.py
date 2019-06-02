@@ -12,8 +12,8 @@ if __name__ == "__main__":
         browser.crawl_data()
         
     except:
-        browser.배고파()
+        browser.hungry()
         print("error")
     finally:
-        browser.배고파()
+        browser.hungry()
         print("end")

@@ -25,7 +25,7 @@ class CrawlBrowser:
         self.until = Sns.last_date(self.keyword['id'])
         self.since = self.until - dt.timedelta(days=1)
 
-    def 배고파(self):
+    def hungry(self):
         self.browser.close()
         conn.close()
         cursor.close()
