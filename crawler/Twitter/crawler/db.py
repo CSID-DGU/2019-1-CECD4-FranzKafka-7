@@ -41,7 +41,7 @@ class Sns:
     def last_date(keyword):
         sql = '''
         SELECT  `sns`.* FROM `sns` WHERE `sns`.`keyword_id` = %s 
-        ORDER BY `sns`.`p_date` DESC LIMIT 1
+        ORDER BY `sns`.`p_date` asc LIMIT 1
         '''
         cursor.execute(sql, keyword)
         result = cursor.fetchone()
