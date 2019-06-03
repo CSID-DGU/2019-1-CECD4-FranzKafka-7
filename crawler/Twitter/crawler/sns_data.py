@@ -60,33 +60,33 @@ class CrawlBrowser:
 
     def go_twit(self):
         print('go_twit')
-        browser = self.browser
+        
         url = self.url%(self.keyword['word'], self.since, self.until)
-        browser.get(url)
-        browser.implicitly_wait(30)
+        self.browser.get(url)
+        self.browser.implicitly_wait(30)
 
 
     def main_loop(self):
         
-        browser = self.browser
+        
         print('main_loop')
         keyword = self.keyword
         lastHeight = 0
-        newHeight = browser.execute_script("return document.body.scrollHeight")
+        newHeight = self.browser.execute_script("return document.body.scrollHeight")
 
         sns_list = []
         twitter_metadata_list = []
         while lastHeight != newHeight:
             
             lastHeight = newHeight
-            browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             for i in range(0,6):
                 time.sleep(3)
-                newHeight = browser.execute_script("return document.body.scrollHeight")
+                newHeight = self.browser.execute_script("return document.body.scrollHeight")
                 if newHeight != lastHeight:
                     break;
 
-        html = browser.page_source
+        html = self.browser.page_source
         soup = BeautifulSoup(html,'html.parser')
         for item in soup.find_all("li", {"class": "stream-item"}):
                 tweet = item.find('div', {"class":"tweet"})
