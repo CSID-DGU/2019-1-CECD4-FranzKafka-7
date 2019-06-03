@@ -11,5 +11,17 @@ ActiveAdmin.register Sns do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+    index do
+        selectable_column
+        id_column
+        column :content
+        column :keyword do |obj|
+            obj.keyword.word
+        end
+        column :p_date   
+        column :created_at
+        actions
+    end
+
 
 end
