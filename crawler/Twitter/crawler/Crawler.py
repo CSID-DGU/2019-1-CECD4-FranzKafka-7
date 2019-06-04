@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-import time
-import sns_data
 import os
 import sys
+sys.path.append(os.path("/home/ubuntu/.local/lib/python3.5/site-packages"))
+import time
+import sns_data
+
 
 if __name__ == "__main__":
     try:
-        sys.path.append(os.path("/home/ubuntu/.local/lib/python3.5/site-packages"))
+        
         start_time = time.time()
         browser = sns_data.CrawlBrowser()
         
