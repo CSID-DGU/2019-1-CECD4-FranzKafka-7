@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python3.5
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from db import *

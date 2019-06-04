@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python3.5
 import pymysql;
 import os;
 import sys;
