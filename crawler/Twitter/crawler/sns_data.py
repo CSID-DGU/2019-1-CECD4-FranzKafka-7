@@ -38,7 +38,7 @@ class CrawlBrowser:
     def crawl_data(self):
         start_t = time.time()
         while self.until != self.end_date:
-            print('crawl_data')
+            print('crawl_data -> ', end='')
             self.go_twit()
 
             sns_list, twitter_metadata_list = self.main_loop()
@@ -46,9 +46,10 @@ class CrawlBrowser:
             if sns_list != []:
                 first_id = Sns.save(sns_list);
                 TwitterMetadata.save(first_id, twitter_metadata_list)
+                print('save Data -> ', end='')
             
             end_t = time.time()
-            print(end_t-start_t,'s after')
+            print(str(end_t-start_t)+'s after')
             if end_t - start_t > self.total_t - REDUNDANCY:
                 break;
             elif self.until == self.end_date:
@@ -66,7 +67,7 @@ class CrawlBrowser:
 
 
     def go_twit(self):
-        print('go_twit')
+        print('go_twit -> ', end='')
         
         url = self.url%(self.keyword['word'], self.since, self.until)
         self.browser.get(url)
@@ -76,7 +77,7 @@ class CrawlBrowser:
     def main_loop(self):
         
         
-        print('main_loop')
+        print('main_loop -> ', end='')
         keyword = self.keyword
         lastHeight = 0
         newHeight = self.browser.execute_script("return document.body.scrollHeight")
