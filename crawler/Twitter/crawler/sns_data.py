@@ -6,12 +6,13 @@ from db import *
 import datetime as dt
 from bs4 import BeautifulSoup
 import time
-
+REDUNDANCY = 20.0
 class CrawlBrowser:
     # browser = None
     # option = None
-    def __init__(self):
+    def __init__(self, total_t):
         print('init')
+        self.total_t = total_t
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
@@ -26,14 +27,16 @@ class CrawlBrowser:
         self.until = Sns.last_date(self.keyword['id'])
         self.since = self.until - dt.timedelta(days=1)
 
-    def hungry(self):
-        self.browser.close()
+    def __del__(self):
+        try:
+            self.browser.close()
+        except Exception as ex: 
+            print('err:', ex)
         conn.close()
         cursor.close()
 
-    
-
     def crawl_data(self):
+        start_t = time.time()
         while self.until != self.end_date:
             print('crawl_data')
             self.go_twit()
@@ -44,12 +47,16 @@ class CrawlBrowser:
                 first_id = Sns.save(sns_list);
 
                 TwitterMetadata.save(first_id, twitter_metadata_list)
-
-            if self.until == self.end_date:
+            
+            end_t = time.time()
+            print(end_t-start_t,'s after')
+            if end_t - start_t > self.total_t - REDUNDANCY:
+                break;
+            elif self.until == self.end_date:
                 if len(keywords)-1 == keywords.index(keyword):
                     conn.close()
                     self.browser.close()
-                    sys.exit()
+                    
                 else:
                     self.keyword = self.keyword[keywords.index(keyword)+1]
             else:
@@ -82,7 +89,7 @@ class CrawlBrowser:
             lastHeight = newHeight
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             for i in range(0,6):
-                time.sleep(3)
+                time.sleep(1)
                 newHeight = self.browser.execute_script("return document.body.scrollHeight")
                 if newHeight != lastHeight:
                     break;
