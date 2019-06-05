@@ -14,7 +14,7 @@ class CrawlBrowser:
         print('init')
         self.total_t = total_t
         options = webdriver.ChromeOptions()
-        options.add_argument('headless')
+        #options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
         options.add_argument("disable-gpu")
         self.browser = webdriver.Chrome('chromedriver', chrome_options=options)
@@ -45,7 +45,6 @@ class CrawlBrowser:
             
             if sns_list != []:
                 first_id = Sns.save(sns_list);
-
                 TwitterMetadata.save(first_id, twitter_metadata_list)
             
             end_t = time.time()
@@ -54,9 +53,9 @@ class CrawlBrowser:
                 break;
             elif self.until == self.end_date:
                 if len(keywords)-1 == keywords.index(keyword):
+                    cursor.close()
                     conn.close()
-                    self.browser.close()
-                    
+                    self.browser.close()                    
                 else:
                     self.keyword = self.keyword[keywords.index(keyword)+1]
             else:
@@ -88,8 +87,8 @@ class CrawlBrowser:
             
             lastHeight = newHeight
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            for i in range(0,6):
-                time.sleep(1)
+            for i in range(0,4):
+                time.sleep(3)
                 newHeight = self.browser.execute_script("return document.body.scrollHeight")
                 if newHeight != lastHeight:
                     break;

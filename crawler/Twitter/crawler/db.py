@@ -45,6 +45,7 @@ class Sns:
         '''
         cursor.execute(sql, keyword)
         result = cursor.fetchone()
+        dt.datetime(year=17,month=7,day=28)
         if result is None:
             return dt.datetime.now().date()
         else:
