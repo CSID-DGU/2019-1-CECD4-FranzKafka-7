@@ -88,8 +88,8 @@ class CrawlBrowser:
             
             lastHeight = newHeight
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            for i in range(0,4):
-                time.sleep(3)
+            for i in range(0,6):
+                time.sleep(1)
                 newHeight = self.browser.execute_script("return document.body.scrollHeight")
                 if newHeight != lastHeight:
                     break;
@@ -101,7 +101,7 @@ class CrawlBrowser:
                 
                 time_stamp = dt.datetime.fromtimestamp(int(tweet.find("span",{"class":"_timestamp"})['data-time']))
                 content = tweet.find('p', {'class':'TweetTextSize'}).text
-                sns_list.append((keyword['id'], content, str(time_stamp) ))
+                sns_list.append((keyword, content, str(time_stamp) ))
                 
                 twitter_metadata_list.append((tweet['data-item-id'], tweet['data-name'], tweet['data-screen-name'], tweet['data-user-id']))
         
