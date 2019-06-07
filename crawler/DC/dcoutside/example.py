@@ -15,7 +15,7 @@ while(True):
 
         to_json.append(pprint(crawler.get_post('jijinhee', i)))
         time.sleep(3)
-        if i%2000 == 0 :
+        if i%100 == 0 :
             with open(str(from_i)+'_'+str(i)+'.json', 'w') as outfile:
                 json.dump(to_json, outfile)
             to_json = []
