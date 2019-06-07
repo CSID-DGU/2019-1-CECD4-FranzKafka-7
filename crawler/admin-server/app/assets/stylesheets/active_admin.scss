@@ -1,0 +1,29 @@
+@import "active_admin/mixins";
+@import "active_admin/base";
+@import "font-awesome";
+
+$panelBorder: #babdc5;
+$skinActiveColor: #b57bf7;
+$bodyColor: rgba(236, 240, 241, 0.48);
+$skinBlack: rgb(55, 71, 79);
+$panelHeaderBck: $skinBlack;
+$skinBlackLight: rgb(69, 90, 100);
+$textGray: rgb(174, 179, 181);
+$skinTextColor: #1e2a33;
+$skinTextActiveColor: white;
+$skinTextTable: #7f8c8d;
+$skinHeaderBck: #1e2a33;
+
+@import "active_admin_flat_skin";
+
+#import_json{
+    height: 100% !important;
+    box-shadow: none;
+    border-radius: 0;
+    background: #b57bf7;
+    color: white;
+    border: none;
+    text-shadow: none;
+    padding: 11px 15px;
+    margin-right: 0px;
+}
