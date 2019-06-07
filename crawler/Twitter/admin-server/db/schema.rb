@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_202141) do
+ActiveRecord::Schema.define(version: 2019_06_07_043904) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "namespace"
@@ -42,28 +42,22 @@ ActiveRecord::Schema.define(version: 2019_06_01_202141) do
     t.string "word"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "active", default: false
-    t.datetime "end_date", default: "2010-01-01 00:00:00"
   end
 
-  create_table "sns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.datetime "p_date"
-    t.text "content"
-    t.bigint "keyword_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["keyword_id"], name: "index_sns_on_keyword_id"
-  end
-
-  create_table "twitter_metadata", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "twitters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "fullname"
+    t.string "name"
     t.bigint "item_id"
-    t.string "user_data_name"
-    t.string "user_screen_name"
-    t.bigint "user_id"
-    t.integer "sns_id"
+    t.integer "likes"
+    t.integer "replies"
+    t.integer "retweets"
+    t.text "content"
+    t.datetime "p_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "keyword_id"
+    t.index ["keyword_id"], name: "index_twitters_on_keyword_id"
   end
 
-  add_foreign_key "sns", "keywords"
+  add_foreign_key "twitters", "keywords"
 end

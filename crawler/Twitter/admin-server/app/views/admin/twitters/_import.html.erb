@@ -1,0 +1,23 @@
+<%= form_tag import_admin_twitters_path, multipart: true, id: "import_form" do %>
+    <%= file_field_tag :file, style: "display:none", accept: 'application/json' , id: 'file_field'%>
+    keyword : <%= collection_select(:keyword, :id, Keyword.all, :id, :word) %> &nbsp
+    <button type="button" id="import_json">Import JSON </button>  
+<% end %>
+
+<script>
+    $("#import_json").on('click', function(){
+        $file = $("#file_field")
+        if($file.val()==""){
+            $file.trigger('click')
+        }else{
+            $("#import_form").submit()
+        }
+    })
+    $("#file_field").on('change', function(){
+        if($(this).val()==""){
+            $("#import_json").text("import_json")
+        }else{
+            $("#import_json").text("Save")
+        }
+    })
+</script>
