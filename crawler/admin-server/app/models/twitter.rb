@@ -35,6 +35,7 @@ class Twitter < ApplicationRecord
             
             if i%1000 == 0 or i == size-1
                 begin
+                    puts i.to_s+"개 까지 함"
                     Twitter.import tweets, validate_uniqueness: true
                     tweets = []
                 rescue Exception => e
