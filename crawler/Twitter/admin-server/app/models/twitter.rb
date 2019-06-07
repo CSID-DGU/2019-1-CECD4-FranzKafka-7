@@ -2,6 +2,8 @@ class Twitter < ApplicationRecord
     belongs_to :keyword
     validates_uniqueness_of :item_id
     require 'activerecord-import/active_record/adapters/mysql2_adapter'
+ 
+      
     def self.json_insert(file, keyword_id)
         p 'start insert'
         
@@ -9,15 +11,20 @@ class Twitter < ApplicationRecord
         #ActiveRecord::Base.logger = nil
         
         json = JSON.parse(file)
+        
         size = json.size
         tweets = []
 
         json.each_with_index do |j,i|
+            j["item_id"] = j.delete("id")
+
+            if tweets.pluck(:item_id).include? j["item_id"]
+                next
+            end
             
             j.delete("html")
             j.delete("url")
-            p_date = DateTime.parse(j.delete("timestamp"))
-            j["item_id"] = j.delete("id")
+            p_date = DateTime.parse(j.delete("timestamp"))            
             j["content"] = j.delete("text")
             j["name"] = j.delete("user")
             j["keyword_id"] = keyword_id
