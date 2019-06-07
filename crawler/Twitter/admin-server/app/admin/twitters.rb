@@ -31,8 +31,7 @@ ActiveAdmin.register Twitter do
             obj.keyword.word
         end
         column :p_date
-        column :created_at
-        
+        column :created_at        
         actions
     end
 
