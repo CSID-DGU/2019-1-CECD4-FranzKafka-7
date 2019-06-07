@@ -14,11 +14,10 @@ end = int(sys.argv[2])
 from_i = i
 while(True):
     try:
-
-        to_json.append(pprint(crawler.get_post('jijinhee', i)))
         time.sleep(6)
+        to_json.append(pprint(crawler.get_post('jijinhee', i)))
         if i%100 == 99 or i == end :
-            with open(str(from_i)+'_'+str(i)+'.json', 'w') as outfile:
+            with open('~/'+str(from_i)+'_'+str(i)+'.json', 'w') as outfile:
                 json.dump(to_json, outfile)
             to_json = []
             from_i = i+1
