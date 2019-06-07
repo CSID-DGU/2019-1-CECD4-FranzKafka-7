@@ -2,13 +2,12 @@ class Twitter < ApplicationRecord
     belongs_to :keyword
     validates_uniqueness_of :item_id
     require 'activerecord-import/active_record/adapters/mysql2_adapter'
- 
-      
+
     def self.json_insert(file, keyword_id)
         p 'start insert'
         
-        #old_logger = ActiveRecord::Base.logger
-        #ActiveRecord::Base.logger = nil
+        old_logger = ActiveRecord::Base.logger
+        ActiveRecord::Base.logger = nil
         
         json = JSON.parse(file)
         
@@ -31,7 +30,7 @@ class Twitter < ApplicationRecord
             j["p_date"] = p_date
             tweets << Twitter.new(j)
             
-            if i%1000 == 0 or i == size-1
+            if i%10000 == 0 or i == size-1
                 begin
                     Twitter.import tweets, validate_uniqueness: true
                     tweets = []
@@ -40,8 +39,7 @@ class Twitter < ApplicationRecord
                     next
                 end
             end
-            
         end
-        #ActiveRecord::Base.logger = old_logger
+        ActiveRecord::Base.logger = old_logger
     end
 end

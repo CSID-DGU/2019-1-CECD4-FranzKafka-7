@@ -35,5 +35,7 @@ ActiveAdmin.register Twitter do
         actions
     end
 
+    filter :id
+    filter :item_id
 
 end
