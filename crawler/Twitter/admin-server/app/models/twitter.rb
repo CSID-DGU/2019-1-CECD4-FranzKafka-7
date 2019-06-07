@@ -5,8 +5,8 @@ class Twitter < ApplicationRecord
     def self.json_insert(file, keyword_id)
         p 'start insert'
         
-        old_logger = ActiveRecord::Base.logger
-        ActiveRecord::Base.logger = nil
+        #old_logger = ActiveRecord::Base.logger
+        #ActiveRecord::Base.logger = nil
         
         json = JSON.parse(file)
         size = json.size
@@ -35,6 +35,6 @@ class Twitter < ApplicationRecord
             end
             
         end
-        ActiveRecord::Base.logger = old_logger
+        #ActiveRecord::Base.logger = old_logger
     end
 end
