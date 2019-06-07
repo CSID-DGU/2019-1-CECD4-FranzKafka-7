@@ -279,6 +279,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   puma (~> 3.11)
   rails (~> 5.2.3)
+  ransack
   sass-rails (~> 5.0)
   selenium-webdriver
   spring

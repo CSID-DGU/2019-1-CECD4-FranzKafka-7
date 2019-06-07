@@ -32,10 +32,12 @@ ActiveAdmin.register Twitter do
         end
         column :p_date
         column :created_at
+        
         actions
     end
 
     filter :id
     filter :item_id
+    filter :p_date
 
 end

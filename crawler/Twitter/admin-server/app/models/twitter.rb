@@ -23,7 +23,7 @@ class Twitter < ApplicationRecord
             
             j.delete("html")
             j.delete("url")
-            p_date = DateTime.parse(j.delete("timestamp"))            
+            p_date = DateTime.parse(j.delete("timestamp")).in_time_zone('Asia/Seoul')
             j["content"] = j.delete("text")
             j["name"] = j.delete("user")
             j["keyword_id"] = keyword_id
