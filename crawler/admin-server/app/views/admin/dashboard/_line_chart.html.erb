@@ -10,7 +10,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script>
     $.getJSON(
-        '/twitters/months'
+        '/twitters/cache_months'
     ,
     function (data) {
         int_data = data.map( (d) => { return [parseInt(d[0]), d[1]]})

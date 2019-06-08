@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "admin/dashboard#index"
 
   get 'twitters/months'=> 'twitters#months'
+  get 'twitters/cache_months'=> 'twitters#cache_months'
 end
