@@ -15,7 +15,7 @@
     function (data) {
         int_data = data.map( (d) => { return [parseInt(d[0]), d[1]]})
 
-        Highcharts.chart('container', {
+        a = Highcharts.chart('container', {
             chart: {
                 zoomType: 'x'
             },
@@ -27,13 +27,16 @@
                     'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
             },
             xAxis: {
-                type: 'datetime'
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                        month: "%y년 %m월",
+
+                }
             },
             yAxis: {
                 title: {
                     text: 'Number of times'
-                },
-                floor: 0,
+                }
                 
             },
             legend: {
@@ -56,7 +59,7 @@
                     marker: {
                         radius: 1
                     },
-                    lineWidth: 2,
+                    lineWidth: 1,
                     states: {
                         hover: {
                             lineWidth: 1
@@ -69,8 +72,20 @@
             series: [{
                 type: 'area',
                 name: '언급 된 수',
-                data: int_data
-            }]
+                data: int_data,
+                dataLabels: {
+                    align: "right"
+                }                
+                
+                
+            }],
+
+            tooltip: {
+                dateTimeLabelFormats: {
+                    hour: "%y년 %m월"
+                }                
+            }
+            
         });
     }
 );
