@@ -13,7 +13,7 @@
         '/twitters/cache_months'
     ,
     function (data) {
-        int_data = data.map( (d) => { return [parseInt(d[0]), d[1]]})
+        int_data = data.map( (d) => { return [parseInt(d[0])+1*1000*60*60*24, d[1]]})
 
         a = Highcharts.chart('container', {
             chart: {
