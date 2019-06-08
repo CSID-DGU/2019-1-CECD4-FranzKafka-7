@@ -10,3 +10,7 @@ gall_list=[]
 
 with open('gall_list.json') as json_file:
     gall_list = json.load(json_file)
+
+
+print(gall_list.index(sys.argv[1]))
+
