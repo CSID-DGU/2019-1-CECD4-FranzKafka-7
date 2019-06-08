@@ -1,5 +1,24 @@
 from bs4 import BeautifulSoup
 import pdb
+import re
+def parse_list(markup) -> dict:
+    
+    soup = BeautifulSoup(markup,'html.parser')
+    gall_nums = soup.find_all('td',attrs={'class':'gall_num'})
+
+    result=[]
+    for gall_num in gall_nums:
+        
+        num = re.findall('\d+', gall_num.text)[0] if len(re.findall('\d+', gall_num.text)) > 0 else None
+        if num is not None:
+            result.append(num)
+
+    print(result)
+
+
+    return result
+
+
 
 def parse_post(markup) -> dict:
     

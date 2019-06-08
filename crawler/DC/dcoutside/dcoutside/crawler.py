@@ -36,6 +36,23 @@ class DCInsideCrawler:
         except NoSuchGalleryError:
             return self.get_post(gall_id, post_no)
 
+    def get_board_num(self, gall_id, page_num):
+        try:            
+            header = {
+                "User-Agent" : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.80 Safari/537.36'
+            }
+            url = 'https://gall.dcinside.com/board/lists'
+
+            resp = requests.get('%s/?id=%s&page=%d' % (url, gall_id, page_num), headers=header)
+
+            board_list = parse_list(resp.text)            
+
+            return board_list
+        except Exception as e:
+            print(e)
+        
+            
+
 
     def get_all_comments(self, gall_id, post_no, comment_cnt):
         comment_page_cnt = (comment_cnt - 1) // COMMENTS_PER_PAGE + 1

@@ -6,39 +6,55 @@ import sys
 crawler = DCInsideCrawler()
 
 
+# save_list = []
+
+# for i in range(1, 384):
+#     time.sleep(3)
+#     save_list += crawler.get_board_num('jijinhee',i)
+
+# with open('gall_list.json', 'w') as outfile:
+#     json.dump(save_list, outfile)
+gall_list=[]
+
+with open('gall_list.json') as json_file:
+    gall_list = json.load(json_file)
+
+size = len(gall_list)
+
+start = int(sys.argv[1])
+end = int(sys.argv[2])
+
+crawling_list = gall_list[start:end]
 
 
 to_json = []
-i = int(sys.argv[1])
-end = int(sys.argv[2])
-from_i = i
-while(True):
+
+
+
+from_val = crawling_list[0]
+
+for idx, val in enumerate(crawling_list):
     try:
         time.sleep(3)
-        if len(to_json) >= 100 or i == end :
-            with open(str(from_i)+'_'+str(i-1)+'.json', 'w') as outfile:
-                json.dump(to_json, outfile)
-            to_json = []
-            from_i = i
+        tmp = crawler.get_post('jijinhee', int(val))
+        pprint(tmp)
+        to_json.append(tmp)
 
-        pprint(crawler.get_post('jijinhee', i))
-
-        to_json.append(crawler.get_post('jijinhee', i))
-
-        if i == end:
-            break;
-
-        i+=1
     except KeyboardInterrupt:
         print('keyboard interrupt')
-        with open(str(from_i)+'_'+str(i-1)+'.json', 'w') as outfile:
+        with open(str(from_val)+'_'+str(val)+'.json', 'w') as outfile:
             json.dump(to_json, outfile)
-            
-            
+
     except Exception as e:
         print(e)
-        i+=1
         pass
+
+    finally:
+        if idx%300==299 or idx == size-1 :
+            with open(str(from_val)+'_'+str(val)+'.json', 'w') as outfile:
+                json.dump(to_json, outfile)
+            to_json = []
+            from_val = val
 
 
 
