@@ -17,7 +17,9 @@ ActiveAdmin.register Twitter do
 
     collection_action :import, method: [:post] do
         keyword_id = params["keyword"]["id"]
-        Twitter.json_insert(params[:file].read, keyword_id)
+        valid_flag = params['valid'] == "1"
+        
+        Twitter.json_insert(params[:file].read, keyword_id, valid_flag)
         redirect_to admin_twitters_path
     end
     index do

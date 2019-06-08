@@ -1,5 +1,6 @@
 <%= form_tag import_admin_twitters_path, multipart: true, id: "import_form" do %>
     <%= file_field_tag :file, style: "display:none", accept: 'application/json' , id: 'file_field'%>
+    중복 체크 : <%= select_tag('valid', options_for_select([['안함', 0],['함' , 1]])) %> &nbsp
     keyword : <%= collection_select(:keyword, :id, Keyword.all, :id, :word) %> &nbsp
     <button type="button" id="import_json">Import JSON </button>  
 <% end %>

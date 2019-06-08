@@ -3,7 +3,7 @@ class Twitter < ApplicationRecord
     validates_uniqueness_of :item_id
     require 'activerecord-import/active_record/adapters/mysql2_adapter'
 
-    def self.json_insert(file, keyword_id)
+    def self.json_insert(file, keyword_id, valid_flag)
         p 'start insert'
         
         old_logger = ActiveRecord::Base.logger
@@ -20,9 +20,10 @@ class Twitter < ApplicationRecord
         json.each_with_index do |j,i|
             j["item_id"] = j.delete("id")
 
-            if tweets.pluck(:item_id).include? j["item_id"]
-                next
-            end
+            
+            # if tweets.pluck(:item_id).include? j["item_id"]
+            #     next
+            # end
             
             j.delete("html")
             j.delete("url")
@@ -36,7 +37,11 @@ class Twitter < ApplicationRecord
             if i%1000 == 0 or i == size-1
                 begin
                     puts i.to_s+"개 까지 함"
-                    Twitter.import tweets, validate_uniqueness: true
+                    if valid_flag == true
+                        Twitter.import tweets, validate_uniqueness: true
+                    else
+                        Twitter.import tweets
+                    end
                     tweets = []
                 rescue Exception => e
                     p e.message
