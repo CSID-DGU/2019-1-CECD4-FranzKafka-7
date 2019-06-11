@@ -11,7 +11,9 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
     #
-    
+    div 'Twitter : ' + Twitter.count.to_s + '개'
+    div 'DcInside : ' + Dcinside.count.to_s + '개'
+
     columns do
       panel "Twitter Data" do
         render 'line_chart',  {model_name: 'twitters'}
