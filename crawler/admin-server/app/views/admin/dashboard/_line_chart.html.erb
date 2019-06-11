@@ -1,4 +1,4 @@
-<div id="container" style="text-align: center; min-width: 310px; height: 400px; margin: 0 auto">
+<div id="container_<%= model_name %>" style="text-align: center; min-width: 310px; height: 400px; margin: 0 auto">
     <div style="padding-top:50px">
     기다려주세욤
     </div>
@@ -10,17 +10,17 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script>
     $.getJSON(
-        '/twitters/cache_months'
+        '/<%= model_name %>/cache_months'
     ,
     function (data) {
         int_data = data.map( (d) => { return [parseInt(d[0])+1*1000*60*60*24, d[1]]})
 
-        a = Highcharts.chart('container', {
+        a = Highcharts.chart('container_<%= model_name %>', {
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: '2009-2019 Number of times mentioned on Twitter per month'
+                text: '2009-2019 Number of times mentioned on <%= model_name %> per month'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?

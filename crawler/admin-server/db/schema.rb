@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_07_043904) do
+ActiveRecord::Schema.define(version: 2019_06_11_053756) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "namespace"
@@ -38,6 +38,25 @@ ActiveRecord::Schema.define(version: 2019_06_07_043904) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "dcinsides", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "user_id"
+    t.text "body"
+    t.integer "view_dn"
+    t.string "title"
+    t.integer "post_no"
+    t.integer "view_up"
+    t.datetime "written_at"
+    t.string "gall_id"
+    t.string "nickname"
+    t.integer "comment_cnt"
+    t.integer "view_cnt"
+    t.string "user_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "keyword_id"
+    t.index ["keyword_id"], name: "index_dcinsides_on_keyword_id"
+  end
+
   create_table "keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "word"
     t.datetime "created_at", null: false
@@ -59,5 +78,6 @@ ActiveRecord::Schema.define(version: 2019_06_07_043904) do
     t.index ["keyword_id"], name: "index_twitters_on_keyword_id"
   end
 
+  add_foreign_key "dcinsides", "keywords"
   add_foreign_key "twitters", "keywords"
 end

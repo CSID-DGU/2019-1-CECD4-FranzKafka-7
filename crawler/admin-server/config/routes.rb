@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   get 'twitters/months'=> 'twitters#months'
   get 'twitters/cache_months'=> 'twitters#cache_months'
+  get 'dcinsides/months'=> 'dcinsides#months'
+  get 'dcinsides/cache_months'=> 'dcinsides#cache_months'
 end
