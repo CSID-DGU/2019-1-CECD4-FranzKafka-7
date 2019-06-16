@@ -11,8 +11,11 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
     #
-    div 'Twitter : ' + Twitter.count.to_s + '개'
+    div '지진'
+    div 'Twitter : ' + Twitter.where(keyword: 1).count.to_s + '개'
     div 'DcInside : ' + Dcinside.count.to_s + '개'
+    div '산불'
+    div 'Twitter : ' + Twitter.where(keyword: 2).count.to_s + '개'    
 
     columns do
       panel "Twitter Data" do
@@ -22,6 +25,7 @@ ActiveAdmin.register_page "Dashboard" do
         # div "인스타 : #{ImageInfo.where("insta_data_id is not null").count } 개"
       end
     end
+
     columns do      
       panel "DcInside Data",style:"" do
         render 'line_chart',  {model_name: 'dcinsides'}

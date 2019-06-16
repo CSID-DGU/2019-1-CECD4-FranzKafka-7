@@ -25,9 +25,9 @@ ActiveAdmin.register Dcinside do
     index do
         selectable_column
         id_column
-        column :user_id
+        # column :user_id
         column :nickname
-        column :user_ip
+        # column :user_ip
         column :post_no
         column :title
         column :body
@@ -35,10 +35,10 @@ ActiveAdmin.register Dcinside do
         column :keyword do |obj|
             obj.keyword.word
         end
-        column :comment_cnt
-        column :view_cnt
-        column :view_up
-        column :created_at        
+        # column :comment_cnt
+        # column :view_cnt
+        # column :view_up
+        # column :created_at        
         actions
     end
 

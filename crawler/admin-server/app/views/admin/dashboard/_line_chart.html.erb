@@ -1,4 +1,4 @@
-<div id="container_<%= model_name %>" style="text-align: center; min-width: 310px; height: 400px; margin: 0 auto">
+<div id="container_<%= model_name %>" style="text-align: center; min-width: 310px; height: 300px; margin: 0 auto">
     <div style="padding-top:50px">
     기다려주세욤
     </div>
@@ -12,15 +12,21 @@
     $.getJSON(
         '/<%= model_name %>/cache_months'
     ,
-    function (data) {
-        int_data = data.map( (d) => { return [parseInt(d[0])+1*1000*60*60*24, d[1]]})
+    function (data) {        
+
+        inp_data = Array(data.length)
+        $.each(data, function(index, item){
+            inp_data[index] = item.map((d, i ) => { return [parseInt(d[0])+1*1000*60*60*24, d[1]]})
+        })
+        
+  //      int_data = data.map((d, i ) => { return [parseInt(d[0])+1*1000*60*60*24, d[1]]})
 
         a = Highcharts.chart('container_<%= model_name %>', {
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: '2009-2019 Number of times mentioned on <%= model_name[0..-2] %> per month'
+                text: 'keyword : 2009-2019 Number of times mentioned on <%= model_name[0..-2] %> per month'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -69,16 +75,18 @@
                 }
             },
 
-            series: [{
-                type: 'area',
-                name: '언급 된 수',
-                data: int_data,
-                dataLabels: {
-                    align: "right"
-                }                
-                
-                
-            }],
+            series: inp_data.map((v)=>{
+                    return {
+                    type: 'area',
+                    name: '언급 된 수',
+                    data: v,
+                    dataLabels: {
+                        align: "right"
+                    }
+                }
+            }
+            )           
+            ,
 
             tooltip: {
                 dateTimeLabelFormats: {
