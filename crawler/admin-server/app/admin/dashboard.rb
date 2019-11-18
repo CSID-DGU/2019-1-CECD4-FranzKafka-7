@@ -13,9 +13,7 @@ ActiveAdmin.register_page "Dashboard" do
     #
     div '지진'
     div 'Twitter : ' + Twitter.where(keyword: 1).count.to_s + '개'
-    div 'DcInside : ' + Dcinside.count.to_s + '개'
-    div '산불'
-    div 'Twitter : ' + Twitter.where(keyword: 2).count.to_s + '개'    
+    div 'DcInside : ' + Dcinside.count.to_s + '개'  
 
     columns do
       panel "Twitter Data" do
