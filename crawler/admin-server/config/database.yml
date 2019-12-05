@@ -19,9 +19,13 @@ default: &default
   password: <%= ENV['MYSQL_PASS']%>
   socket: /tmp/mysql.sock
   host: 127.0.0.1
+  
 
 development:
   <<: *default
+  host: 34.97.92.18
+  port: 3306
+  password: <%= ENV['FIN_MYSQL_PASS']%>
   database: twitter_crawl_development
 
 # Warning: The database defined as "test" will be erased and
