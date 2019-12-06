@@ -7,4 +7,14 @@ var connection = mysql.createConnection({
 	database : 'twitter_crawl_development'
 });
 
-module.exports = connection;
+exports.getConnection = (callback) => {
+	pool.getConnection(
+		(err, conn) => {
+			if (err) {
+				return callback(err, null);
+			} else {
+				return callback(null, conn);
+			}
+		}
+	);
+};
